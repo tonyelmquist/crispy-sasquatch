@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frontend test</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: arial;
+        line-height: 1.5;
+
+      }
+
+      .page {
+        max-width: 1200px;
+        text-align: left;
+        margin: 0 auto;
+      }
+      .col-1-3 {
+        width: 33.33%;
+      }
+      [class*='col-'] {
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1>Welcome to our frontend developer test</h1>
+
+      <p>The programming test is your opportunity to show off your technical excellence. In many aspects it is more important than the CV you sent us, as this tells what choices you make as a developer, and how you choose to solve problems presented to you.</p>
+
+      <ul>
+        <li>Please use good practices as a programmer when solving the problem.</li>
+        <li>Please document and have unit-tests.</li>
+        <li>Please submit your code as a github repository</li>
+      </ul>
+
+      <p>
+        Convert the following design to to a responsive website
+      </p>
+
+      <h2>Creating the menu:</h2>
+      <ul>
+        <li>Use the channel web service: <code>https://ws.zooom.no/v1/channels</code></li>
+        <li>With the JSON returned, for each item in the <code>items</code> array create the top menu</li>
+        <li>Use the field <code>channel.name</code> for title in menu</li>
+        <li>Use the field <code>cover_image</code> for background image</li>
+      </ul>
+
+      See example of <strong>simplified</strong> return from the channels web service <a href="channels.json">channels.json</a>
+
+      <h2>Creating the timeline:</h2>
+      <ul>
+        <li>Use the articles web service: <code>https://ws.zooom.no/v1/articles/{urlSafeName}?limit=10&amp;offset=0</code></li>
+        <li>The value for <code>urlSafeName</code> should come from <code>channel.urlSafeName</code> from the channels web service</li>
+        <li>With the JSON returned, for each item in the <code>items</code> array create the timeline</li>
+        <li>The timeline should be implemented by getting 10 articles from the web service</li>
+        <li>The timeline should show articles in reverse chronological order, web service delivers them in this order.</li>
+        <li>The timeline should show the date of the article to the left, if multiple articles is published on the same date, you should show a small dot.</li>
+        <li>The image should use the field <code>cover_image</code> from the JSON</li>
+        <li>The heading should use the field <code>contents.title</code> from the JSON</li>
+        <li>The timestamp should use the field <code>meta.created</code> from the JSON and should be displayed in human readable format</li>
+        <li>The text should use the field <code>contents.preamble</code> from the JSON.</li>
+        <li>When the user scroll to the bottom of the view you should load more articles by increasing <code>offset</code> parameter in the web service</li>
+      </ul>
+
+      See example of <strong>simplified</strong> return from the articles web service <a href="articles.json">articles.json</a>
+
+      <h2>Design:</h2>
+      <p>The design should be responsive and have three different sizes, large, medium and small (desktop, tablet and mobile). Tablet design is same as desktop without margins.</p>
+      <h3>Large (Desktop)</h3>
+      <img src="desktop.jpg" />
+      <div class="col-1-3">
+        <h3>Small (Mobile)</h3>
+        <img src="mobile.jpg" />
+      </div>
+      <div class="col-1-3">
+        <h3>Small navigation</h3>
+        <img src="mobile-menu-open.jpg" />
+      </div>
+      <div class="col-1-3">
+        <h3>Small second timeline selected</h3>
+        <img src="mobile2.jpg" />
+      </div>
+  </body>
+</html>

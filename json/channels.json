@@ -1,0 +1,21 @@
+{
+  "items": [{
+    "channel": {
+      "urlSafeName": "havornreiret",
+      "name": "Havørnreiret"
+    },
+    "cover_image": "https:\/\/wsvipr.startsiden.no\/images\/41\/55\/41551.jpg"
+  }, {
+    "channel": {
+      "urlSafeName": "hegrekolonien",
+      "name": "Hegrekolonien"
+    },
+    "cover_image": "https:\/\/wsvipr.startsiden.no\/images\/42\/93\/42931.jpg"
+  }, {
+    "channel": {
+      "name": "Tjeldparet",
+      "urlSafeName": "tjeldparet"
+    },
+    "cover_image": "https:\/\/abcnyheter.drpublish.aptoma.no\/out\/images\/article\/\/2016\/05\/18\/195217598\/1\/stor\/2757814.jpg"
+  }]
+}
