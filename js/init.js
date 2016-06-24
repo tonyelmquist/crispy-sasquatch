@@ -11,9 +11,7 @@ var zoom = {
         var that = this;
 
         $.getJSON(that.channelUrl, function (data) {
-
             var channels = data.items;
-
             that.buildMenus(channels);
         })
             .fail(function () {
@@ -47,6 +45,7 @@ var zoom = {
                 mobileMenuItem = $('<div class="column small-12 mobile-menu-item show-for-small-only"></div>');
             menuItem.attr('style', 'background-image: url(' + image + ')');
             menuItem.attr('urlSafeName', urlSafeName);
+            mobileMenuItem.attr('urlSafeName', urlSafeName);
             mobileMenuItem.append('<span class="headline">' + name + '</span>');
             menuItem.append('<span class="headline hide-for-small-only">' + name + '</span>');
             menuItem.append('<div class="bottom-bar hide-for-small-only"></div>');
@@ -56,23 +55,27 @@ var zoom = {
         });
         $('.menu-item:first').addClass('active');
         $('.mobile-menu-item:first').addClass('active');
-        $('.menu-item').on('click', function (){
-            $('.article-block').fadeOut(100);
-            $('.' + $(this).attr('urlsafename') + '-article-block').fadeIn(100);
-            $('.active').removeClass('active');
-            $(this).addClass('active');
-
+        $('.menu-item').on('click', function () {
+            that.selectChannel($(this).attr('urlsafename'));
         });
 
-        $('.mobile-menu').click(function() {
-            if ($(this).hasClass('open')){
-                $(this).addClass('closed');
-                $(this).removeClass('open');
+        $('.mobile-menu').on('click', '.mobile-menu-item', function () {
+            var parent = $(this).parent();
+            if (!$(this).hasClass('active')) {
+                parent.addClass('closed');
+                parent.removeClass('open');
+                that.selectChannel($(this).attr('urlSafeName'));
+                return;
             }
-            else{
-                $(this).addClass('open');
-                $(this).removeClass('closed');
+            if (parent.hasClass('open')) {
+                parent.addClass('closed');
+                parent.removeClass('open');
             }
+            else {
+                parent.addClass('open');
+                parent.removeClass('closed');
+            }
+
         });
 
     },
@@ -115,12 +118,25 @@ var zoom = {
         });
 
         articleBlock.addClass(urlSafeName + '-article-block');
-        articleBlock
-
-        $('.timelines-block').append(articleBlock);
-        $('.timelines-block').append('<div class="row footer" id="footer">' +
+        $(articleBlock).append('<div class="row footer" id="footer">' +
             '<div class="dashed-line"></div>' +
             '</div>');
+
+        $('.timelines-block').append(articleBlock);
+
+    },
+
+    selectChannel: function (channelName) {
+        $('.article-block').fadeOut(100);
+        $('.' + channelName + '-article-block').fadeIn(100);
+        $('.active').removeClass('active');
+        $('.menu-item[urlsafename=' + channelName + ']').addClass('active');
+        $('.mobile-menu-item').removeClass('active');
+        var mobileMenuItem = $('.mobile-menu-item[urlsafename=' + channelName + ']');
+        console.log(mobileMenuItem);
+        $('.mobile-menu-item[urlsafename=' + channelName + ']').remove();
+        mobileMenuItem.addClass('active');
+        $('.mobile-menu').prepend(mobileMenuItem);
     }
 
 };
